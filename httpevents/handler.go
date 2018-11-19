@@ -41,23 +41,23 @@ func NewHandlerWith(logger *events.Logger, handler http.Handler) http.Handler {
 		// down to the client.
 		// We don't silence the panic here tho and instead we forward it back to
 		// the parent handler which may need to be aware that a panic occurred.
-		defer func() {
-			err := recover()
+		// defer func() {
+		// 	err := recover()
 
-			if err != nil {
-				w.WriteHeader(http.StatusInternalServerError)
-			}
+		// 	if err != nil {
+		// 		w.WriteHeader(http.StatusInternalServerError)
+		// 	}
 
-			w.ResponseWriter = nil
-			w.logger = nil
-			w.wroteHeader = false
-			w.request.release()
-			responseWriterPool.Put(w)
+		// 	w.ResponseWriter = nil
+		// 	w.logger = nil
+		// 	w.wroteHeader = false
+		// 	w.request.release()
+		// 	responseWriterPool.Put(w)
 
-			if err != nil {
-				panic(err)
-			}
-		}()
+		// 	if err != nil {
+		// 		panic(err)
+		// 	}
+		// }()
 
 		// The request is forwarded to the handler, if it never calls the
 		// writer's WriteHeader method we force the call with "200 OK" status
