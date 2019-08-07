@@ -62,6 +62,7 @@ func (h *Handler) HandleEvent(e *events.Event) {
 		}
 	}
 
+	fmt.Println("does this get seen")
 	fmt.Println("objconv err", (objconv.Encoder{Emitter: &f.emitter}).Encode(f.value))
 	f.buffer.WriteByte('\n')
 
