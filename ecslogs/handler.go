@@ -62,7 +62,7 @@ func (h *Handler) HandleEvent(e *events.Event) {
 		}
 	}
 
-	(objconv.Encoder{Emitter: &f.emitter}).Encode(f.value)
+	fmt.Println("objconv err", (objconv.Encoder{Emitter: &f.emitter}).Encode(f.value))
 	f.buffer.WriteByte('\n')
 
 	h.mutex.Lock()
